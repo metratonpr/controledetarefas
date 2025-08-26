@@ -53,11 +53,12 @@ public class TarefaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Long id) {
+    public ResponseEntity<String> remover(@PathVariable Long id) {
         Tarefa existente = tarefaRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa " + id + " não encontrada"));
 
         tarefaRepository.delete(existente);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Registro excluído com sucesso");
     }
+
 }
